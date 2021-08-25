@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="api-for-crud-suite.xml" />
+	<munit:test name="api-for-crud-main-test-success" doc:id="11762b8c-9250-4adb-919d-fa100f70e6e5" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock APIkit Router" doc:id="430d0802-aa6d-4854-8755-1f287a06ed8f" processor="apikit:router">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="5501fea6-0ea8-426b-aef9-5297dc5325c3" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/json --- readUrl('classpath://apiforcrudmaintestsuccess\mock_payload.dwl')]" mediaType="application/json" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://apiforcrudmaintestsuccess\mock_variable_.dwl')]" />
+						<munit-tools:variable key="httpStatus" value="#[readUrl('classpath://apiforcrudmaintestsuccess\mock_variable_1.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="b4a86f53-f82f-47cd-9db6-3db1f1e35ea9" >
+				<munit:payload value="#[readUrl('classpath://apiforcrudmaintestsuccess\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://apiforcrudmaintestsuccess\set-event_attributes.dwl')]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to api-for-crud-main" doc:id="155cb8b1-fb0b-4023-b489-115993081889" name="api-for-crud-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="6239acd1-c1dc-4999-af42-98d7049bd556" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import apiforcrudmaintestsuccess::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="get:\employeejson:api-for-crud-config-test-success" doc:id="6d451d6d-296e-429f-9390-1d8d3337fb5c" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select" doc:id="10407ef9-8dbd-42ea-9ddf-fa2a0f61c132" processor="db:select">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="f8fd6ca9-6f46-4488-b4eb-04439ae391fb" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://getemployeejsonapiforcrudconfigtestsuccess\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getemployeejsonapiforcrudconfigtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="3fb1088d-21db-4950-979c-4d7d24bd36c1" >
+				<munit:payload value="#[readUrl('classpath://getemployeejsonapiforcrudconfigtestsuccess\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://getemployeejsonapiforcrudconfigtestsuccess\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getemployeejsonapiforcrudconfigtestsuccess\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\employeejson:api-for-crud-config" doc:id="3700d3c2-6800-4c2b-923d-4dd4d73c779a" name="get:\employeejson:api-for-crud-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="9766e6eb-30bf-4f6a-9912-61b79feb93ad" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getemployeejsonapiforcrudconfigtestsuccess::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="post:\employeejson:application\json:api-for-crud-config-test-success" doc:id="9c3a284e-61f9-47a2-a8e8-9bc3d7208d66" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Insert" doc:id="4c489ac4-d78e-4bd0-9907-ccfedf3e8120" processor="db:insert">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="cc74a8c3-6ef1-447f-ae5d-f986f7ed468f" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://postemployeejsonapplicationjsonapiforcrudconfigtestsuccess\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://postemployeejsonapplicationjsonapiforcrudconfigtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="44829699-6364-4181-98c9-02582ff550eb" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://postemployeejsonapplicationjsonapiforcrudconfigtestsuccess\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://postemployeejsonapplicationjsonapiforcrudconfigtestsuccess\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://postemployeejsonapplicationjsonapiforcrudconfigtestsuccess\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to post:\employeejson:application\json:api-for-crud-config" doc:id="247122b5-5d62-48d0-b2cb-561dedad913b" name="post:\employeejson:application\json:api-for-crud-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="959da04b-de63-41da-b7aa-21b353209fe7" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import postemployeejsonapplicationjsonapiforcrudconfigtestsuccess::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="put:\employeejson\(empid):application\json:api-for-crud-config-test-success" doc:id="fb50ae32-30d9-448f-9126-825784f5e278" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Update" doc:id="fa5cb28c-8572-4385-934f-7257c874a98f" processor="db:update">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="124463cd-403e-4c15-abe9-e55a7328a8e8" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://putemployeejsonempidapplicationjsonapiforcrudconfigtestsuccess\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://putemployeejsonempidapplicationjsonapiforcrudconfigtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="86ec0b15-2499-4529-a55c-16ed60eba3c0" >
+				<munit:payload value="#[output application/json --- readUrl('classpath://putemployeejsonempidapplicationjsonapiforcrudconfigtestsuccess\set-event_payload.dwl')]" encoding="UTF-8" mediaType="application/json" />
+				<munit:attributes value="#[readUrl('classpath://putemployeejsonempidapplicationjsonapiforcrudconfigtestsuccess\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://putemployeejsonempidapplicationjsonapiforcrudconfigtestsuccess\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to put:\employeejson\(empid):application\json:api-for-crud-config" doc:id="991b6b67-17ca-47e1-8999-b660eeda56b4" name="put:\employeejson\(empid):application\json:api-for-crud-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="d48bca69-9975-485a-8d49-55b7812498ff" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import putemployeejsonempidapplicationjsonapiforcrudconfigtestsuccess::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="delete:\employeejson\(empid):api-for-crud-config-test-success" doc:id="ada90520-67e6-430d-914c-1b665e63cfa4" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Delete" doc:id="d22ec768-9e81-43d7-a801-61b54bc210b8" processor="db:delete">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="71dac86e-1772-4443-bf2c-aa51c27afe25" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://deleteemployeejsonempidapiforcrudconfigtestsuccess\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://deleteemployeejsonempidapiforcrudconfigtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="02b39179-2bba-47ab-805e-8350949626f7" >
+				<munit:payload value="#[readUrl('classpath://deleteemployeejsonempidapiforcrudconfigtestsuccess\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://deleteemployeejsonempidapiforcrudconfigtestsuccess\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://deleteemployeejsonempidapiforcrudconfigtestsuccess\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to delete:\employeejson\(empid):api-for-crud-config" doc:id="458a4144-cc3d-4d06-a317-eb83c7024894" name="delete:\employeejson\(empid):api-for-crud-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="d5378b3a-c737-4732-83a6-669a08021448" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import deleteemployeejsonempidapiforcrudconfigtestsuccess::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="get:\employeejson\(empid):api-for-crud-config-test-success" doc:id="96bd337a-4c8d-4b81-90f8-39326690c9ac" >
+		<munit:behavior >
+			<munit-tools:mock-when doc:name="Mock Select" doc:id="bd173766-8698-4770-aeed-581e1a119fb1" processor="db:select">
+				<munit-tools:with-attributes >
+					<munit-tools:with-attribute whereValue="96d73639-0a63-43bc-acfa-ae5dfce1870a" attributeName="doc:id" />
+				</munit-tools:with-attributes>
+				<munit-tools:then-return >
+					<munit-tools:payload value="#[output application/java --- readUrl('classpath://getemployeejsonempidapiforcrudconfigtestsuccess\mock_payload.dwl')]" mediaType="application/java" encoding="UTF-8" />
+					<munit-tools:variables >
+						<munit-tools:variable key="outboundHeaders" value="#[readUrl('classpath://getemployeejsonempidapiforcrudconfigtestsuccess\mock_variable_.dwl')]" />
+					</munit-tools:variables>
+				</munit-tools:then-return>
+			</munit-tools:mock-when>
+			<munit:set-event doc:name="Set Input" doc:id="497dc43f-1b18-4d1d-9ea7-c531631286bb" >
+				<munit:payload value="#[readUrl('classpath://getemployeejsonempidapiforcrudconfigtestsuccess\set-event_payload.dwl')]" encoding="UTF-8" />
+				<munit:attributes value="#[readUrl('classpath://getemployeejsonempidapiforcrudconfigtestsuccess\set-event_attributes.dwl')]" />
+				<munit:variables >
+					<munit:variable key="outboundHeaders" value="#[readUrl('classpath://getemployeejsonempidapiforcrudconfigtestsuccess\set-event_variable_.dwl')]" />
+				</munit:variables>
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\employeejson\(empid):api-for-crud-config" doc:id="452d407f-a878-4ffc-94e1-d794b6d4059a" name="get:\employeejson\(empid):api-for-crud-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert payload" doc:id="860cad00-e78f-4ffb-93ec-d51905c26ea8" message="The payload does not match">
+				<munit-tools:that ><![CDATA[#[%dw 2.0
+import getemployeejsonempidapiforcrudconfigtestsuccess::assert_expression_payload
+---
+assert_expression_payload::main({payload: payload, attributes: attributes, vars: vars})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
