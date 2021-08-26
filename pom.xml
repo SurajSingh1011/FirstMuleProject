@@ -30,22 +30,26 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
-				
 				<configuration>
-				<cloudHubDeployment>
-      <uri>https://anypoint.mulesoft.com</uri>
-      <muleVersion>${mule.version}</muleVersion>
-      <username>${anypoint.username}</username>
-      <password>${anypoint.password}</password>
-      <environment>${env}</environment>
-      <applicationName>${appname}</applicationName>
-      <businessGroup>${business}</businessGroup>
-      <workerType>${vCore}</workerType>
-      <workers>${workers}</workers>
-      <objectStoreV2>true</objectStoreV2>
-    </cloudHubDeployment>			
+					<cloudHubDeployment>
+						<uri>https://anypoint.mulesoft.com</uri>
+						<muleVersion>${mule.version}</muleVersion>
+						<username>${anypoint.username}</username>
+						<password>${anypoint.password}</password>
+						<environment>${env}</environment>
+						<applicationName>${appname}</applicationName>
+						<businessGroup>${business}</businessGroup>
+						<workerType>${vCore}</workerType>
+						<workers>${workers}</workers>
+						<objectStoreV2>true</objectStoreV2>
+					</cloudHubDeployment>
+					<sharedLibraries>
+						<sharedLibrary>
+							<groupId>com.mycompany</groupId>
+							<artifactId>postgresql-42.2.23</artifactId>
+						</sharedLibrary>
+					</sharedLibraries>
 				</configuration>
-				
 			</plugin>
 			<plugin>
 				<groupId>com.mulesoft.munit.tools</groupId>
@@ -98,11 +102,7 @@
 			<version>1.9.3</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
-		<dependency>
-			<groupId>com.mycompany</groupId>
-			<artifactId>postgresql-42.2.23</artifactId>
-			<version>0.1</version>
-		</dependency>
+
 		<dependency>
 			<groupId>612a8970-de69-4736-af86-a614ea169670</groupId>
 			<artifactId>api-for-crud</artifactId>
@@ -129,6 +129,11 @@
 			<artifactId>assertions</artifactId>
 			<version>1.0.2</version>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.mycompany</groupId>
+			<artifactId>postgresql-42.2.23</artifactId>
+			<version>0.1</version>
 		</dependency>
 	</dependencies>
 
