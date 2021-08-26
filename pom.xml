@@ -44,9 +44,10 @@
 						<objectStoreV2>true</objectStoreV2>
 					</cloudHubDeployment>
 					<sharedLibraries>
+						
 						<sharedLibrary>
-							<groupId>com.mycompany</groupId>
-							<artifactId>postgresql-42.2.23</artifactId>
+							<groupId>org.postgresql</groupId>
+							<artifactId>postgresql</artifactId>
 						</sharedLibrary>
 					</sharedLibraries>
 				</configuration>
@@ -131,9 +132,9 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>com.mycompany</groupId>
-			<artifactId>postgresql-42.2.23</artifactId>
-			<version>0.1</version>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.23</version>
 		</dependency>
 	</dependencies>
 
