@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.mycompany</groupId>
-	<artifactId>crud</artifactId>
+	<artifactId>crudoperation</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>mule-application</packaging>
 
-	<name>crud</name>
+	<name>crudoperation</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,7 +15,6 @@
 
 		<app.runtime>4.3.0-20210322</app.runtime>
 		<mule.maven.plugin.version>3.5.1</mule.maven.plugin.version>
-		<munit.version>2.3.4</munit.version>
 	</properties>
 
 	<build>
@@ -31,37 +30,12 @@
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
-			
 					<sharedLibraries>
-						
 						<sharedLibrary>
 							<groupId>org.postgresql</groupId>
 							<artifactId>postgresql</artifactId>
 						</sharedLibrary>
 					</sharedLibraries>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.mulesoft.munit.tools</groupId>
-				<artifactId>munit-maven-plugin</artifactId>
-				<version>${munit.version}</version>
-				<executions>
-					<execution>
-						<id>test</id>
-						<phase>test</phase>
-						<goals>
-							<goal>test</goal>
-							<goal>coverage-report</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<coverage>
-						<runCoverage>true</runCoverage>
-						<formats>
-							<format>html</format>
-						</formats>
-					</coverage>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -81,6 +55,13 @@
 			<classifier>mule-plugin</classifier>
 		</dependency>
 		<dependency>
+			<groupId>37faac4d-36e6-4ae7-aa6e-02234287d824</groupId>
+			<artifactId>api-for-crud</artifactId>
+			<version>1.0.0</version>
+			<classifier>raml</classifier>
+			<type>zip</type>
+		</dependency>
+		<dependency>
 			<groupId>org.mule.modules</groupId>
 			<artifactId>mule-apikit-module</artifactId>
 			<version>1.5.1</version>
@@ -92,34 +73,6 @@
 			<version>1.9.3</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
-
-		<dependency>
-			<groupId>612a8970-de69-4736-af86-a614ea169670</groupId>
-			<artifactId>api-for-crud</artifactId>
-			<version>1.0.3</version>
-			<classifier>raml</classifier>
-			<type>zip</type>
-		</dependency>
-		<dependency>
-			<groupId>com.mulesoft.munit</groupId>
-			<artifactId>munit-runner</artifactId>
-			<version>2.3.4</version>
-			<classifier>mule-plugin</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.mulesoft.munit</groupId>
-			<artifactId>munit-tools</artifactId>
-			<version>2.3.4</version>
-			<classifier>mule-plugin</classifier>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.weave</groupId>
-			<artifactId>assertions</artifactId>
-			<version>1.0.2</version>
-			<scope>test</scope>
-		</dependency>
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
@@ -129,9 +82,9 @@
 
 	<repositories>
 		<repository>
-			<id>anypoint-exchange</id>
+			<id>anypoint-exchange-v2</id>
 			<name>Anypoint Exchange</name>
-			<url>https://maven.anypoint.mulesoft.com/api/v3/maven</url>
+			<url>https://maven.anypoint.mulesoft.com/api/v2/maven</url>
 			<layout>default</layout>
 		</repository>
 		<repository>
